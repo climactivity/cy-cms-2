@@ -5,8 +5,21 @@ import preprocess from 'svelte-preprocess';
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
-	preprocess: preprocess(),
-
+	preprocess: preprocess({
+		postcss: true
+	}),
+	vite: {
+		css: {
+		  preprocessorOptions: {
+			scss: {
+			  additionalData: '@use "src/variables.scss" as *;',
+			},
+		  },
+		},
+		ssr: {
+		  noExternal: ['@fortawesome/*'],
+		}
+	  },
 	kit: {
 		adapter: adapter({
 			pages: 'pb_public',

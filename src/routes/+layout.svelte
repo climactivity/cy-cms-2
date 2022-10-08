@@ -1,48 +1,51 @@
 <script>
-	import './styles.css';
-</script>
-
-<div class="app">
-
-	<main>
+	import "./styles.css";
+	import Header from "$lib/components/header/Header.svelte";
+	import Searchbar from "$lib/components/header/Searchbar.svelte";
+	import Footer from "$lib/components/Footer.svelte";
+  </script>
+  
+  <!--navigation here-->
+  <!-- <main class="layout bg-zinc-200"> -->
+  
+	<!-- <div class="header important shadow-md align-middle flex flex-row place-content-between">
+		<h1 class="text-2xl my-auto ml-2">Cy CMS v2.0</h1>
+	</div>
+  
+	<nav class="nav bg-zinc-200 pt-2">
+	  <ul class="grid grid-flow-row fixed ml-2 space-y-2">
+		<a href="/quests" class="navlink">Aufgaben</a>
+		<a href="/infobytes" class="navlink">Infobytes</a>
+		<a href="/media" class="navlink">Medien</a>
+		<a href="/aspects" class="navlink">Aspekte</a>
+		<a href="/treetemplates" class="navlink">B&#xE4;ume</a>
+		<a href="/analytics" class="navlink">Analytics</a>
+		<a href="#" class="navlink">Abmelden</a>
+		<hr class="border-2 border-white rounded-full">
+		<a href="https://nk.climactivity.de" class="navlink">Server Status</a>
+	  </ul>
+	</nav> -->
+  
+  <main class=" flex h-screen font-sans">
+	<nav class="fixed ">
+	  <Header />
+	</nav>
+	<div class=" flex-grow pl-20 content-start md:pl-32 pr-3 mt-0">
+	  <content class="">
+		<Searchbar />
 		<slot />
-	</main>
-
-</div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
+	  </content>
+  
+	  <footer class="absolute bottom-0 pl-40  flex-grow-1 ">
+		<!-- TODO footer content-->
+		<!-- <Footer/> -->
+	  </footer>
+	</div>
+  </main>
+  
+  <style>
+	.footer {
+	  grid-area: footer;
 	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
+  </style>
+  

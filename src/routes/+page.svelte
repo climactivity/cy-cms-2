@@ -32,6 +32,9 @@
 		to your new<br />SvelteKit app
 	</h1>
 
+	<div class="text-green-600">
+		Hello
+	</div>
 	{#await authData then userData}
 		you are logged in as {JSON.stringify(userData.user.email)}		
 	{/await}
