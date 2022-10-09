@@ -3,16 +3,19 @@
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 
 	import PocketBase from 'pocketbase';
+	import { findRecord } from '$lib/find-record';
 
 	const client = new PocketBase('http://127.0.0.1:8090');
 
-	const records =  client.records.getFullList('things', 200 /* batch size */, {
-    	sort: '-created',
-	});
+
+	// const records =  client.records.getFullList('test', 200 /* batch size */, {
+    // 	sort: '-created',
+	// });
+
 
 	const authData = client.users.authViaEmail("test@climactivity.de", "12345678");
 
-
+	const findThing = findRecord(client, "test")
 </script>
 
 <svelte:head>
@@ -38,14 +41,14 @@
 	{#await authData then userData}
 		you are logged in as {JSON.stringify(userData.user.email)}		
 	{/await}
-	{#await records}
-		loading...
-	{:then data} 
-		{#each data as record}
-			<li>{record.name}</li>
-		{/each}
-	{/await}
 
+	<div>
+		{#await findThing then thing}
+
+			{JSON.stringify(thing)}
+			
+		{/await}
+	</div>
 </section>
 
 <style>

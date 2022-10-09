@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/labstack/echo/v5"
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 )
@@ -22,6 +23,45 @@ func defaultPublicDir() string {
 	}
 
 	return filepath.Join(os.Args[0], "../pb_public")
+}
+
+type MessageResponse struct {
+	Message string `json:"message"`
+}
+
+func ClientChallengeController(app *pocketbase.PocketBase) echo.HandlerFunc {
+
+	return func(c echo.Context) error {
+
+		collection, err := app.Dao().FindCollectionByNameOrId("test")
+
+		if err != nil {
+			res := MessageResponse{
+				Message: "Server unhealthy",
+			}
+			return c.JSON(500, res)
+		}
+
+		p := c.PathParam("*")
+		log.Default().Println("Find:", p)
+
+		// res := MessageResponse{
+		// 	Message: p,
+		// }
+
+		expr := dbx.HashExp{"slug": p}
+
+		records, err := app.Dao().FindRecordsByExpr(collection, expr)
+
+		if err != nil || len(records) < 1 {
+			res := MessageResponse{
+				Message: "Not found!",
+			}
+			return c.JSON(400, res)
+		}
+
+		return c.JSON(200, records[0])
+	}
 }
 
 func ServeCMS(fileSystem fs.FS, disablePathUnescaping bool) echo.HandlerFunc {
@@ -66,6 +106,8 @@ func main() {
 
 	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 		// serves static files from the provided public dir (if exists)
+		e.Router.GET("/find/*", ClientChallengeController(app))
+
 		e.Router.GET("/*", ServeCMS(os.DirFS(publicDirFlag), false))
 
 		return nil
