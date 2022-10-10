@@ -5,6 +5,11 @@ on:
     branches: [ "release" ]
   pull_request:
     branches: [ "release" ]
+    
+  workflow_call:
+    secrets:
+      CR_PAT:
+        required: true
 
 jobs:
   
