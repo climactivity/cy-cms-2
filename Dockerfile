@@ -1,3 +1,4 @@
+LABEL org.opencontainers.image.source="https://github.com/climactivity/cy-cms-2 "
 FROM node:alpine as node-builder 
 
 WORKDIR /cms-frontend
