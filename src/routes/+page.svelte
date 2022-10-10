@@ -11,8 +11,6 @@
 	// 	sort: '-created',
 	// });
 
-	const authData = client.users.authViaEmail('test@climactivity.de', '12345678');
-
 	const findThing = findRecord(client, 'test_challenge');
 </script>
 
@@ -22,21 +20,9 @@
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<div class="text-green-600">Hello</div>
-	{#await authData then userData}
+	<!-- {#await authData then userData}
 		you are logged in as {JSON.stringify(userData.user.email)}
-	{/await}
+	{/await} -->
 
 	<div>
 		{#await findThing then thing}
