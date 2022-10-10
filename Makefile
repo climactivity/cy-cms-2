@@ -1,6 +1,6 @@
 .PHONY: serve
 
-.DEFAULT_GOAL := serve
+.DEFAULT_GOAL := all
 
 
 all: dependencies frontend serve
