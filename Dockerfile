@@ -18,7 +18,7 @@ COPY . .
 
 COPY --from=node-builder /cms-frontend /cms-frontend/pb_public
 
-RUN go build -v -o /usr/local/bin/app ./... 
-RUN app migrate
+RUN go build -v -o /usr/local/bin ./... 
+RUN cms migrate
 
-ENTRYPOINT ["app", "serve", "--http=0.0.0.0:8090", "--dir=pb_data"]
+ENTRYPOINT ["cms", "serve", "--http=0.0.0.0:8090", "--dir=pb_data"]

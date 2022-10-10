@@ -3,6 +3,6 @@
 .DEFAULT_GOAL := serve
 
 serve: 
-	go run pb_src/main.go serve
+	go run cms/main.go serve
 
 $(MAIN): main.go

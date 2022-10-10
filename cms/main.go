@@ -14,6 +14,8 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
+
+	_ "github.com/climactivity/cy-cms-2/migrations"
 )
 
 func defaultPublicDir() string {
@@ -33,7 +35,7 @@ func ClientChallengeController(app *pocketbase.PocketBase) echo.HandlerFunc {
 
 	return func(c echo.Context) error {
 
-		collection, err := app.Dao().FindCollectionByNameOrId("challenge")
+		collection, err := app.Dao().FindCollectionByNameOrId("challenges")
 
 		if err != nil {
 			res := MessageResponse{
@@ -45,19 +47,14 @@ func ClientChallengeController(app *pocketbase.PocketBase) echo.HandlerFunc {
 		p := c.PathParam("*")
 		log.Default().Println("Find:", p)
 
-		// res := MessageResponse{
-		// 	Message: p,
-		// }
-
 		expr := dbx.HashExp{"slug": p}
-
 		records, err := app.Dao().FindRecordsByExpr(collection, expr)
 
 		if err != nil || len(records) < 1 {
 			res := MessageResponse{
 				Message: "Not found!",
 			}
-			return c.JSON(400, res)
+			return c.JSON(404, res)
 		}
 
 		return c.JSON(200, records[0])
