@@ -1,22 +1,26 @@
-# create-svelte
+# About
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is the repo for the new [PocketBase](https://pocketbase.io/) based CMS for our app. 
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
+It's not very complete yet
 ## Developing
 
+You'll need [go](https://go.dev/) and npm
+
+Run 
+``` bash
+make all
+```
+ to 
+  - fetch the js dependencies  with `npm install`
+  - build the frontend with `npm run build`
+  - and finally compile and run the go part with `go run ...`
+    - go will fetch dependencies automatically on first build
+
+
+### Hacking on the frontend
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
 
 ```bash
 npm run dev
@@ -24,6 +28,16 @@ npm run dev
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
 ```
+
+### working on the backend
+go sources are located in the `cms` directory, migrations go in the `migrations` dir.
+### building a containerized version
+run 
+
+``` bash
+make run-container
+```
+ to deploy a version with docker-compose.
 
 ## Building
 
@@ -35,4 +49,5 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+The CMS frontend uses the static site adapter `@sveltejs/adpter-static` and uses it's build output as the public dir `pb_public` for PocketBase.
+
