@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    restart: "unless-stopped"
+    container_name: cms
+    expose:
+      - "8090"
+
+    ports:
+      - "8090:8090"

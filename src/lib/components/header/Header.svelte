@@ -25,7 +25,7 @@
     </li>
     <li class="my-2 md:my-0">
       <a
-        href="/quests"
+        href="/"
         class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400"
       >
         <i class="fa-solid fa-person-circle-question mr-3 " /><span
@@ -35,7 +35,7 @@
     </li>
     <li class="my-2 md:my-0">
       <a
-        href="/aspects"
+        href="/"
         class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400"
       >
         <i class="fa-solid fa-glasses mr-3" /><span
@@ -45,7 +45,7 @@
     </li>
     <li class="my-2 md:my-0 ">
       <a
-        href="/infobytes"
+        href="/"
         class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400"
       >
         <i class="fa-solid fa-info mr-3 " /><span
@@ -75,7 +75,7 @@
     </li>
     <li class="my-2 md:my-0">
       <a
-        href="/analytics"
+        href="/"
         class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400"
       >
         <i class="fas fa-chart-area fa-fw mr-3 " /><span
