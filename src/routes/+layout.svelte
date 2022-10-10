@@ -3,6 +3,9 @@
 	import Header from '$lib/components/header/Header.svelte';
 	import Searchbar from '$lib/components/header/Searchbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import { page } from '$app/stores';
+
+	$: console.log($page.routeId);
 </script>
 
 <!--navigation here-->
@@ -26,22 +29,36 @@
 	  </ul>
 	</nav> -->
 
-<main class=" flex h-screen font-sans">
-	<nav class="fixed ">
-		<Header />
-	</nav>
-	<div class=" flex-grow pl-20 content-start md:pl-32 pr-3 mt-0">
-		<content class="">
-			<Searchbar />
-			<slot />
-		</content>
+{#if $page.routeId === 'login'}
+	<main class=" flex h-screen font-sans bg-gray-100">
+		<div class=" flex-grow pl-20 content-start md:pl-32 pr-3 mt-0">
+			<content class="">
+				<slot />
+			</content>
 
-		<footer class="absolute bottom-0 pl-40  flex-grow-1 ">
-			<!-- TODO footer content-->
-			<!-- <Footer/> -->
-		</footer>
-	</div>
-</main>
+			<footer class="absolute bottom-0 pl-40  flex-grow-1 ">
+				<!-- TODO footer content-->
+				<!-- <Footer/> -->
+			</footer>
+		</div>
+	</main>
+{:else}
+	<main class=" flex h-screen font-sans">
+		<nav class="fixed ">
+			<Header />
+		</nav>
+		<div class=" flex-grow pl-20 content-start md:pl-32 p-8 mt-0">
+			<content class="">
+				<slot />
+			</content>
+
+			<footer class="absolute bottom-0 pl-40  flex-grow-1 ">
+				<!-- TODO footer content-->
+				<!-- <Footer/> -->
+			</footer>
+		</div>
+	</main>
+{/if}
 
 <style>
 	.footer {

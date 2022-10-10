@@ -4,14 +4,11 @@
 
 	import PocketBase from 'pocketbase';
 	import { findRecord } from '$lib/find-record';
-
-	const client = new PocketBase('http://127.0.0.1:8090');
+	import { client } from '$lib/stores/stores';
 
 	// const records =  client.records.getFullList('test', 200 /* batch size */, {
 	// 	sort: '-created',
 	// });
-
-	const findThing = findRecord(client, 'test_challenge');
 </script>
 
 <svelte:head>
@@ -23,12 +20,6 @@
 	<!-- {#await authData then userData}
 		you are logged in as {JSON.stringify(userData.user.email)}
 	{/await} -->
-
-	<div>
-		{#await findThing then thing}
-			{JSON.stringify(thing)}
-		{/await}
-	</div>
 </section>
 
 <style>

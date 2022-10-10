@@ -1,54 +1,52 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte';
+	// import Quill from "quill";
+	// import Delta from "quill-delta"
+	let editorElement;
 
-  let editorElement; 
-
-
-  export let toolbarOptions = [
-		[{ header: 1 }, { header: 2 }, "blockquote", "link", "image", "video"],
-		["bold", "italic", "underline", "strike"],
-		[{ list: "ordered" }, { list: "ordered" }],
+	export let toolbarOptions = [
+		[{ header: 1 }, { header: 2 }, 'blockquote', 'link', 'image', 'video'],
+		['bold', 'italic', 'underline', 'strike'],
+		[{ list: 'ordered' }, { list: 'ordered' }],
 		[{ align: [] }],
-		["clean"]
+		['clean']
 	];
 
+	let quill;
 
-  let quill;
-  onMount(async () => {
-    const { default: Quill } = await import("quill");
+	let editor;
 
-    quill = new Quill("#editorElement", {
-      modules: {
-        toolbar: toolbarOptions
-      },
-      theme: "snow",
-      placeholder: "Write your story..."
-    });
+	export let value = '<p>placeholder</p>';
 
+	let initialValue;
+	onMount(async () => {
+		const { default: Quill } = await import('quill');
+		const { default: Delta } = await import('quill-delta');
 
-  })
+		editorElement.innerHTML = '<p>placeholder2</p>';
 
-  const save = () => {
-    console.log("Content")
-    console.log(editorElement)
-    const editor = editorElement.querySelector('.ql-editor')
-    console.log(editor)
-    console.log(editor.innerHTML)
-    console.log(editorElement.querySelector('.ql-editor'))
+		setTimeout(() => {
+			quill = new Quill('#editorElement', {
+				modules: {
+					toolbar: toolbarOptions
+				},
+				theme: 'snow',
+				placeholder: 'Write your story...'
+			});
 
-    console.log(quill.getContents())
-    console.log(quill.getText())
-    console.log(quill.getText())
+			editor = editorElement.querySelector('.ql-editor');
 
-
-  }
+			quill.on('text-change', function (delta) {
+				value = editor.innerHTML;
+			});
+		}, 1);
+	});
 </script>
 
-<div class="editor-wrapper">
-  <button on:click={save}>SAVE</button>
-<div id="editorElement" bind:this={editorElement}/>
+<div class="editor-wrapper bg-white">
+	<div id="editorElement" bind:this={editorElement} />
 </div>
 
 <style>
-  @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+	@import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
 </style>

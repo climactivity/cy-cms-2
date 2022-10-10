@@ -38,6 +38,7 @@
 		<li class="my-2 md:my-0">
 			<a
 				href="https://nk.climactivity.de"
+				target="_blank"
 				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
 			>
 				<i class="fa-solid fa-globe  " /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
@@ -49,6 +50,7 @@
 		<li class="my-2 md:my-0">
 			<a
 				href="/_/"
+				target="_blank"
 				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
 			>
 				<i class="fa-solid fa-database  " /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
