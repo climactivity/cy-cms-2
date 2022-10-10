@@ -71,7 +71,7 @@
 
 		<li class="my-2 md:my-0">
 			<a
-				href="/_/"
+				href="https://cms2.climactivity.de/_/"
 				target="_blank"
 				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
 			>
