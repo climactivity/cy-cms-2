@@ -5,4 +5,7 @@
 serve: 
 	go run cms/main.go serve
 
-$(MAIN): main.go
+collections: 
+	go run $(MAIN) migrate collections -y
+
+MAIN = cms/main.go
