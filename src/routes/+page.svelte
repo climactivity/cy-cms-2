@@ -15,7 +15,7 @@
 
 	const authData = client.users.authViaEmail("test@climactivity.de", "12345678");
 
-	const findThing = findRecord(client, "test")
+	const findThing = findRecord(client, "test_challenge")
 </script>
 
 <svelte:head>

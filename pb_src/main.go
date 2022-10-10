@@ -33,7 +33,7 @@ func ClientChallengeController(app *pocketbase.PocketBase) echo.HandlerFunc {
 
 	return func(c echo.Context) error {
 
-		collection, err := app.Dao().FindCollectionByNameOrId("test")
+		collection, err := app.Dao().FindCollectionByNameOrId("challenge")
 
 		if err != nil {
 			res := MessageResponse{

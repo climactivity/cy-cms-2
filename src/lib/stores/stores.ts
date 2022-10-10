@@ -61,3 +61,4 @@ export const currentQuestionIndex: Writable<number> = writable(null)
 export const currentQuestion: Writable<Question> = writable(null)
 export const isProd = false
 
+export const baseUrl = 'http://localhost:8090/api/';
