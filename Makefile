@@ -5,6 +5,11 @@
 
 all: dependencies frontend serve
 
+check-compiles: dependencies frontend build-go
+
+build-go: 
+	go build $(MAIN) 
+
 dependencies: 
 	npm install
 
