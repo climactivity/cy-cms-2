@@ -5,13 +5,15 @@
 
 	import ChallengeCard from '$lib/components/Challenges/ChallengeCard.svelte';
 	export const getChallengesMetaData = async (offset, limit) => {
-		const resultset = await client.records.getList('challenges', offset, limit);
+		const resultset = await client.records.getList('tags', offset, limit);
 
 		const items = resultset.items;
 		console.log(items[0]);
 		return { data: items, count: resultset.totalItems };
 	};
 </script>
+
+<h1>Hi</h1>
 
 {#if browser}
 	<ContentTypeList

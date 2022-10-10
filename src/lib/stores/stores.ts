@@ -63,10 +63,16 @@ export const isProd = false;
 export const client = new PocketBase('http://127.0.0.1:8090');
 
 if (browser) {
-	client.authStore.loadFromCookie(document.cookie, 'PB_AUTH');
+	console.log(document.cookie);
+	// await client.authStore.loadFromCookie(document.cookie, 'pocketbase_auth');
 
 	if (!client.authStore.isValid) {
 		goto(`/login?next=${window.location}`);
+	} else {
+		const path = window.location.pathname;
+		if (path.includes('login')) {
+			goto('/');
+		}
 	}
 }
 
@@ -75,12 +81,16 @@ export const login = async (email, password) => {
 		.authViaEmail(email, password)
 		.then((res) => {
 			console.log(email);
-			document.cookie = `PB_AUTH=${client.authStore.exportToCookie()}`;
+			// document.cookie = `PB_AUTH=${client.authStore.exportToCookie()}`;
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
 			const next = urlParams.get('next');
 			if (next) {
-				goto(next);
+				if (next.includes('login')) {
+					goto('/');
+				} else {
+					goto(next);
+				}
 			} else {
 				goto('/');
 			}
@@ -88,4 +98,9 @@ export const login = async (email, password) => {
 		.catch((err) => {
 			console.warn(err);
 		});
+};
+
+export const makeSlug = (title) => {
+	const regex = /[^a-z_]/g;
+	return title.split('(')[0].trim().toLowerCase().replace(regex, '_');
 };

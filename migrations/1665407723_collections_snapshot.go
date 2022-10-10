@@ -16,7 +16,7 @@ func init() {
 			{
 				"id": "systemprofiles0",
 				"created": "2022-10-10 07:27:20.685",
-				"updated": "2022-10-10 07:27:20.685",
+				"updated": "2022-10-10 07:42:27.827",
 				"name": "profiles",
 				"system": true,
 				"schema": [
@@ -75,7 +75,7 @@ func init() {
 			{
 				"id": "05fenidlixxgc3h",
 				"created": "2022-10-10 07:37:32.487",
-				"updated": "2022-10-10 07:37:32.487",
+				"updated": "2022-10-10 12:29:05.604",
 				"name": "challenges",
 				"system": false,
 				"schema": [
@@ -135,7 +135,7 @@ func init() {
 					{
 						"system": false,
 						"id": "09ly3rpt",
-						"name": "field",
+						"name": "type",
 						"type": "select",
 						"required": false,
 						"unique": false,
@@ -146,6 +146,99 @@ func init() {
 								"recurrring",
 								"repeatable"
 							]
+						}
+					},
+					{
+						"system": false,
+						"id": "2rcikcet",
+						"name": "title",
+						"type": "text",
+						"required": false,
+						"unique": false,
+						"options": {
+							"min": null,
+							"max": null,
+							"pattern": ""
+						}
+					}
+				],
+				"listRule": null,
+				"viewRule": null,
+				"createRule": null,
+				"updateRule": null,
+				"deleteRule": null
+			},
+			{
+				"id": "vlq1ylcijwbvjoc",
+				"created": "2022-10-10 13:10:38.479",
+				"updated": "2022-10-10 13:10:38.479",
+				"name": "tags",
+				"system": false,
+				"schema": [
+					{
+						"system": false,
+						"id": "x1exfwll",
+						"name": "tag",
+						"type": "text",
+						"required": true,
+						"unique": true,
+						"options": {
+							"min": null,
+							"max": null,
+							"pattern": "^[a-z_]+$"
+						}
+					},
+					{
+						"system": false,
+						"id": "3hntbogu",
+						"name": "label",
+						"type": "text",
+						"required": true,
+						"unique": false,
+						"options": {
+							"min": null,
+							"max": null,
+							"pattern": ""
+						}
+					}
+				],
+				"listRule": null,
+				"viewRule": null,
+				"createRule": null,
+				"updateRule": null,
+				"deleteRule": null
+			},
+			{
+				"id": "y5fxnca9jza0r1u",
+				"created": "2022-10-10 13:11:14.553",
+				"updated": "2022-10-10 13:11:14.553",
+				"name": "topics",
+				"system": false,
+				"schema": [
+					{
+						"system": false,
+						"id": "zaqnydxx",
+						"name": "topic",
+						"type": "text",
+						"required": true,
+						"unique": true,
+						"options": {
+							"min": null,
+							"max": null,
+							"pattern": "^[a-z_]+$"
+						}
+					},
+					{
+						"system": false,
+						"id": "xnciefav",
+						"name": "label",
+						"type": "text",
+						"required": false,
+						"unique": false,
+						"options": {
+							"min": null,
+							"max": null,
+							"pattern": ""
 						}
 					}
 				],

@@ -23,15 +23,15 @@
 		const { default: Quill } = await import('quill');
 		const { default: Delta } = await import('quill-delta');
 
-		editorElement.innerHTML = '<p>placeholder2</p>';
+		editorElement.innerHTML = value;
 
 		setTimeout(() => {
-			quill = new Quill('#editorElement', {
+			quill = new Quill(editorElement, {
 				modules: {
 					toolbar: toolbarOptions
 				},
 				theme: 'snow',
-				placeholder: 'Write your story...'
+				placeholder: ''
 			});
 
 			editor = editorElement.querySelector('.ql-editor');

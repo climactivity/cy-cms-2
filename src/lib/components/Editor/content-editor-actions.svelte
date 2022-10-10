@@ -6,6 +6,8 @@
 	import { client } from '$lib/stores/stores';
 
 	import type { Content } from './editor-types';
+
+	export let editing;
 	export let saveTarget;
 	const save = async () => {
 		saving = true;
@@ -22,22 +24,15 @@
 
 		console.log('save data!', data);
 
-		client.records.create(saveTarget, formData);
+		let res;
+		if (editing && formData.has('id')) {
+			res = await client.records.update(saveTarget, data.id, formData);
+		} else {
+			res = await client.records.create(saveTarget, formData);
+		}
 
-		return;
-		// const res = await fetch(
-		//   `${baseUrl}${saveTarget}${data._id ? "/" + data._id : ""}`,
-		//   {
-		//     credentials: "include",
-		//     method: data._id ? "PUT" : "POST",
-		//     headers: {
-		//       "Content-Type": "application/json",
-		//     },
-		//     body: JSON.stringify(data),
-		//   }
-		// );
-		// setTimeout(() => (saving = false), 100); // make the button animate even if saving only takes > 100ms
-		// return res.ok;
+		unsavedChanges = 1;
+		return res;
 	};
 	export let data: Content;
 	export let title = '';
@@ -45,18 +40,29 @@
 		history.back();
 	};
 	let saving = false;
-	let unsavedChanges = false;
+	let unsavedChanges = 0;
+
+	$: if (data) {
+		unsavedChanges = unsavedChanges + 1;
+	}
 </script>
 
-<div {...$$props}>
-	<div class="pb-8 mx-auto w-full flex flex-row justify-center">
-		<div class="bg-white rounded-md shadow-none bg-white w-full ">
-			<nav class="grid grid-cols-3  ">
-				<div class="flex flex-row col-span-1 items-stretch">
+<div {...$$props} class="sticky top-0 z-50">
+	<div class="pb-8 mx-auto w-full flex flex-row justify-center ">
+		<div class="bg-white  shadow-none bg-white w-full ">
+			<nav class="flex justify-between ">
+				<div class="flex flex-row col-span-1 items-center">
 					<button class="text-lg my-auto  p-2" on:click|preventDefault={goBack}>🡄</button>
 					<span class="text-lg my-auto">{title}</span>
-					{#if unsavedChanges}
-						* (ungespeicherte änderungen)
+					{#if unsavedChanges > 2}
+						<span class="rounded-full bg-yellow-50 border border-yellow-500 px-2 py-1 mx-2 text-xs">
+							ungespeicherte Änderungen
+						</span>
+					{/if}
+					{#if editing}
+						<span class="rounded-full bg-gray-50 border border-gray-500 px-2 py-1 mx-2 text-xs">
+							bearbeite bestehendes Document</span
+						>
 					{/if}
 				</div>
 				<dev class="flex flex-row col-span-1 col-start-3 place-content-end mr-4">

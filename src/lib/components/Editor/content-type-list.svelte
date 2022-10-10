@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Record from 'pocketbase';
+	import Searchbar from '../header/Searchbar.svelte';
 
 	export let ListElementComponent;
 
@@ -27,7 +28,7 @@
 
 	const selectElement = (event: Event, elem) => {
 		console.log(`selected ${elem.name}`);
-		selectedId = elem._id;
+		selectedId = elem.id;
 		const relativeBase = $page.routeId.split('/')[0];
 		goto(`/${relativeBase}/${selectedId}`, {
 			replaceState: false
@@ -57,21 +58,26 @@
 </script>
 
 <div>
-	<div class="clickable cta my-2 p-2" on:click={(e) => newElement(e)}>
-		<button> + hinzufügen </button>
+	<div
+		class="grid grid-flow-col border-b-2 border-gray-300"
+		style="grid-template-columns: 5fr 2fr;"
+	>
+		<Searchbar bind:searchQuery />
+		<div
+			class="cursor-pointer w-full bg-white m-4 mb-6 text-black border-2 border-black font-bold grid items-center rounded-lg"
+			on:click={(e) => newElement(e)}
+		>
+			<button>Hinzufügen +</button>
+		</div>
 	</div>
 
-	<div class="clickable my-2 p-2 flex flex-row">
-		<span>🔎</span>
-		<input id="search" placeholder="Suche" bind:value={searchQuery} />
-	</div>
 	{#if data}
 		<div class="grid space-y-2 space-x-2 list" style="--list-cols: {listCols}">
 			{#each selectedData as elem}
 				<div
 					on:click|preventDefault={(e) => selectElement(e, elem)}
 					class="clickable my-2 p-2 bg-slate-50"
-					class:selected={selectedId === elem._id}
+					class:selected={selectedId === elem['id']}
 				>
 					<svelte:component this={ListElementComponent} data={elem} />
 				</div>
