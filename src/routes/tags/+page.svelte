@@ -17,9 +17,9 @@
 	};
 </script>
 
-<h1 class="font-bold text-2xl py-4">Bereiche</h1>
+<h1 class="font-bold text-2xl py-4">Tags</h1>
 {#await topics}
-	Lade Bereiche...
+	Lade Tags...
 {:then data}
 	{#if browser}
 		<div
