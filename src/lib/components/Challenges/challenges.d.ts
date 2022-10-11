@@ -2,8 +2,8 @@ export interface Challenge {
 	id?: string;
 	slug: string;
 	title?: string;
-	topic?: string;
-	tags?: string[];
+	topic?: any;
+	tags?: any[];
 
 	lead?: boolean;
 	impact?: ChallengeImpact;
@@ -12,7 +12,6 @@ export interface Challenge {
 	frontMatter?: string;
 	summary?: string;
 	tips?: string;
-	todos?: string;
 	content?: string;
 	difficulties?: Difficulties;
 	completedText?: string;
@@ -40,6 +39,7 @@ export interface Difficulty {
 }
 
 export interface Todo {
+	index: number;
 	name: string;
 }
 

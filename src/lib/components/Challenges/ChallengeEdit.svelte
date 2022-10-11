@@ -1,12 +1,18 @@
 <script lang="ts">
-	import { makeSlug } from '$lib/stores/stores';
+	import { client, makeSlug } from '$lib/stores/stores';
+	import { filter } from 'd3';
+	import AnalyticsPage from '../Analytics/AnalyticsPage.svelte';
 	import ContentEditorSection from '../Editor/content-editor-section.svelte';
 	import ContentEditor from '../Editor/content-editor.svelte';
+	import FileEdit from '../Editor/file-edit.svelte';
+	import RtfEdit from '../Editor/rtf-edit.svelte';
 	import SelectEdit from '../Editor/select-edit.svelte';
 	import StringEdit from '../Editor/string-edit.svelte';
 	import type { Challenge, Difficulty } from './challenges';
 	import DifficultyCard from './DifficultyCard.svelte';
 	import DifficultyEdit from './DifficultyEdit.svelte';
+	import TagsEdit from './TagsEdit.svelte';
+	import TopicsEdit from './TopicsEdit.svelte';
 
 	export let data: Challenge = {
 		slug: '',
@@ -17,7 +23,6 @@
 	export let editing = false;
 
 	let selectedDifficulty: Partial<Difficulty> = {};
-
 	const addDifficulty = () => {
 		const name = selectedDifficulty.name;
 		const difficulties = data.difficulties ?? {};
@@ -26,6 +31,18 @@
 		console.log(difficulties);
 		selectedDifficulty = {};
 	};
+
+	const jsonFields = ['difficulties', 'notificationDays'];
+	const listFields = ['tags'];
+
+	let permaLink;
+
+	const externalBaseUrl =
+		import.meta.env.VITE_APP_BASE_URL || 'https://cy-challenge-app-beta.netlify.app';
+
+	$: if (editing && data.id) {
+		permaLink = `${externalBaseUrl}/challenge/${data.slug}`;
+	}
 </script>
 
 <ContentEditor
@@ -35,6 +52,8 @@
 	titleplaceholder="Neue Challenge"
 	saveTarget="challenges"
 	{editing}
+	{jsonFields}
+	{listFields}
 >
 	<ContentEditorSection label="Metadata">
 		<StringEdit
@@ -48,6 +67,17 @@
 
 		<StringEdit id="id" label="id" type="string" placeholder="id" readonly bind:value={data.id} />
 
+		<div class="flex flex-col text-sm text-zinc-700">
+			<span class="font-semibold text-black text-base">Link in der App</span>
+			Speichern überträgt die Änderungen sofort - funktioniert auch ohne "Veröffentlichen", die Challenge
+			kann dann nur nicht in der Challenge-Liste gefunden werden.
+			<a target="_blank" href={permaLink} class="text-blue-800 text-base underline">
+				{permaLink}
+			</a>
+		</div>
+	</ContentEditorSection>
+
+	<ContentEditorSection label="Titel">
 		<StringEdit
 			id="title"
 			label="Title"
@@ -62,24 +92,17 @@
 			}}
 		/>
 
-		<StringEdit
-			id="topic"
-			label="Bereich"
-			type="string"
-			placeholder="Bereich"
-			bind:value={data.topic}
-		/>
+		<TopicsEdit id="topic" label="Bereich" placeholder="-" bind:value={data.topic} />
 
-		<StringEdit
-			id="tags"
-			label="Tags"
-			type="string"
-			placeholder="tag1, tag2, ..."
-			value={data.tags?.join(', ') ?? ''}
-			onChange={(e) => {
-				console.log(e.target.value.split(','));
-				data.tags = e.target.value.split(',').map((v) => v.trim());
-			}}
+		<TagsEdit id="tags" label="Tags" placeholder="tag1, tag2, ..." bind:value={data.tags} />
+
+		<FileEdit id="image" label="Image" bind:value={data.image} />
+
+		<RtfEdit
+			id="frontMatter"
+			label="Einleitung"
+			description="Wird über den Aktionen angezeigt"
+			bind:value={data.frontMatter}
 		/>
 	</ContentEditorSection>
 
@@ -98,63 +121,37 @@
 		<div class="py-4">
 			<label for="lead">
 				Ist Super-Challenge?
-				<input id="lead" type="checkbox" />
+				<input id="lead" type="checkbox" bind:checked={data.lead} />
 			</label>
 		</div>
-
-		<SelectEdit
-			id="type"
-			label="Challenge Art"
-			placeholder="-"
-			bind:value={data.type}
-			options={[
-				{ value: 'recurring', label: 'wöchentlich' },
-				{ value: 'one-time', label: 'einmal' },
-				{ value: 'repeatable', label: 'wiederholbar' }
-			]}
-		/>
 	</ContentEditorSection>
 
 	<ContentEditorSection label="Inhalt">
-		<StringEdit
-			id="frontMatter"
-			label="Einleitung"
-			type="richtext"
-			placeholder="frontMatter"
-			bind:value={data.frontMatter}
-		/>
-
-		<StringEdit
+		<RtfEdit
 			id="summary"
 			label="Warum"
-			type="richtext"
-			placeholder="summary"
+			description="Wird unter den Aktionen angezeigt, fasst das Warum zusammen "
 			bind:value={data.summary}
 		/>
 
-		<StringEdit id="tips" label="Tips" type="richtext" placeholder="tips" bind:value={data.tips} />
-
-		<StringEdit
-			id="todos"
-			label="Todos"
-			type="richtext"
-			placeholder="todos"
-			bind:value={data.todos}
+		<RtfEdit
+			id="tips"
+			label="Tips"
+			description="Hilfreiche (optionale) Todos"
+			bind:value={data.tips}
 		/>
 
-		<StringEdit
+		<RtfEdit
 			id="content"
 			label="Tiefer eingehen"
-			type="richtext"
-			placeholder="content"
+			description="Vertiefende Informationen, da unter dem Fold weiter scrollt kann hier mehr stehen (aber bitte nicht mehr als 1000 Zeichen"
 			bind:value={data.content}
 		/>
 
-		<StringEdit
+		<RtfEdit
 			id="upgradeText"
 			label="Alle Level geschafft Text"
-			type="richtext"
-			placeholder="upgradeText"
+			description="Wird angeizeigt wenn alle Schwierigkeitsgrade der Challenge geschafft wurden, klopf der Nutzer:in nochmal auf die Schulter"
 			bind:value={data.completedText}
 		/>
 	</ContentEditorSection>
@@ -171,7 +168,20 @@
 		<div>
 			<span class="font-semibold">Schwierigkeitsgrade</span>
 			{#each data.difficulties ? Object.values(data.difficulties) : [] as diff}
-				<svelte:component this={DifficultyCard} bind:value={diff} />
+				<svelte:component
+					this={DifficultyCard}
+					bind:value={diff}
+					index={Object.values(data.difficulties).indexOf(diff) ?? 0}
+					onClick={(e) => {
+						console.log(diff);
+						selectedDifficulty = diff;
+					}}
+					onDelete={() => {
+						console.log('delete diff');
+						delete data.difficulties[diff.name];
+						data.difficulties = { ...data.difficulties };
+					}}
+				/>
 			{/each}
 		</div>
 
@@ -181,12 +191,30 @@
 				class="text-black text-lg px-4 py-2 border-black border-2 rounded-lg"
 				on:click={(e) => {
 					addDifficulty();
-				}}>Schwierigkeitsgrad hinzufügen <b>+</b></button
+				}}
 			>
+				{#if data.difficulties[selectedDifficulty.name]}
+					Schwierigkeitsgrad aktualisieren
+				{:else}
+					Schwierigkeitsgrad hinzufügen <b>+</b>
+				{/if}
+			</button>
 		</div>
 	</ContentEditorSection>
 
 	<ContentEditorSection label="Benachrichtigungen">
+		<SelectEdit
+			id="type"
+			label="Challenge Art"
+			placeholder="-"
+			bind:value={data.type}
+			options={[
+				{ value: 'recurring', label: 'wöchentlich' },
+				{ value: 'one-time', label: 'einmal' },
+				{ value: 'repeatable', label: 'wiederholbar' }
+			]}
+		/>
+
 		<StringEdit
 			id="reminderText"
 			label="reminderText"
@@ -194,9 +222,28 @@
 			placeholder="reminderText"
 			bind:value={data.reminderText}
 		/>
+
+		<StringEdit
+			id="tags"
+			label="Days"
+			type="string"
+			placeholder="tag1, tag2, ..."
+			value={data.notificationDays?.join(', ') ?? ''}
+			onChange={(e) => {
+				console.log(e.target.value.split(','));
+				data.notificationDays = e.target.value
+					.split(',')
+					.map((v) => {
+						let val = parseInt(v.trim());
+						if (isNaN(val)) return;
+						return val;
+					})
+					.filter((v) => v != null);
+			}}
+		/>
 	</ContentEditorSection>
 </ContentEditor>
 
-<pre>
+<!-- <pre>
     {JSON.stringify(data, null, 2)}
-</pre>
+</pre> -->

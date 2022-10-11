@@ -7,18 +7,39 @@
 
 	import type { Content } from './editor-types';
 
+	export let jsonFields = ['difficulties', 'notificationDays'];
+	export let listFields = ['tags'];
+
 	export let editing;
 	export let saveTarget;
 	const save = async () => {
 		saving = true;
-
 		const formData = new FormData();
-		Object.keys(data).map((k, i) => {
+
+		Object.keys(data).forEach((k, i) => {
 			const v = data[k];
-			if (v instanceof Blob) {
-				console.log("We're uploading a blob!");
-				// formData.append(k, v)
+			console.log('appending', k);
+			if (v instanceof FileList) {
+				console.log("We're uploading a File!");
+				formData.append(k, v[0]);
+				return;
 			}
+
+			if (jsonFields.some((f) => f === k)) {
+				formData.append(k, JSON.stringify(v));
+				return;
+			}
+
+			if (listFields.some((f) => f === k)) {
+				console.log("We're setting a list!");
+
+				const arr: any[] = v;
+				console.log(arr);
+				arr.forEach((element) => formData.append(k, element));
+				// formData.append(k, JSON.stringify(v));
+				return;
+			}
+
 			formData.append(k, v);
 		});
 
@@ -44,8 +65,22 @@
 
 	$: if (data) {
 		unsavedChanges = unsavedChanges + 1;
+		if (unsavedChanges > 1) {
+		}
 	}
+
+	const preventAccidentalBack = (e) => {
+		if (unsavedChanges > 1) {
+			console.log('Argh');
+			e.preventDefault();
+			const message = 'Ungespeicherte Änderungen gehen verloren!';
+			e.returnValue = message;
+			return message;
+		}
+	};
 </script>
+
+<svelte:window on:beforeunload={preventAccidentalBack} />
 
 <div {...$$props} class="sticky top-0 z-50">
 	<div class="pb-8 mx-auto w-full flex flex-row justify-center ">

@@ -13,6 +13,8 @@
 	};
 </script>
 
+<h1 class="font-bold text-2xl py-4">Challenges</h1>
+
 {#if browser}
 	<ContentTypeList
 		ListElementComponent={ChallengeCard}

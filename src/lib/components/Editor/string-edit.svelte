@@ -27,6 +27,7 @@
 			{placeholder}
 			{...$$props}
 			on:change={onChange}
+			on:input={onInput}
 			class="form-field"
 			{readonly}
 		/>

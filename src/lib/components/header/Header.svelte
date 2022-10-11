@@ -1,96 +1,32 @@
 <script>
+	import SidebarButton from './SidebarButton.svelte';
+
 	let on = true;
-	const check = () => {
-		on = !on;
-	};
 </script>
 
 <div
 	class="{on ? 'sidebar' : 'side'} h-screen menu bg-white p-4 flex items-start nunito  shadow z-40"
 >
 	<ul class="list-reset ">
-		<li class="py-1.5 md:my-0">
-			<a
-				href="/"
-				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
-			>
-				<i class="fa-solid fa-solar-panel " /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
-					>Dashboard</span
-				>
-			</a>
-		</li>
+		<SidebarButton iconClass="fa-home" target="/" label="Home" />
 
 		<div class="my-2 border border-black w-8" />
 
-		<li class="my-2 md:my-0">
-			<a
-				href="/topics"
-				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
-			>
-				<i class="fa-solid fa-swatchbook" /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
-					>Bereiche</span
-				>
-			</a>
-		</li>
-
-		<li class="my-2 md:my-0">
-			<a
-				href="/tags"
-				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
-			>
-				<i class="fa-solid fa-tags " /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
-					>Tags</span
-				>
-			</a>
-		</li>
-
-		<li class="my-2 md:my-0">
-			<a
-				href="/challenges"
-				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
-			>
-				<i class="fa-solid fa-medal " /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
-					>Challegnes</span
-				>
-			</a>
-		</li>
+		<SidebarButton iconClass="fa-swatchbook" target="/topics" label="Bereiche" />
+		<SidebarButton iconClass="fa-tags" target="/tags" label="Tags" />
+		<SidebarButton iconClass="fa-medal" target="/challenges" label="Challenges" />
 
 		<div class="my-2 border border-black w-8" />
 
-		<li class="my-2 md:my-0">
-			<a
-				href="https://nk.climactivity.de"
-				target="_blank"
-				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
-			>
-				<i class="fa-solid fa-globe  " /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
-					>Gameserver</span
-				>
-			</a>
-		</li>
-
-		<li class="my-2 md:my-0">
-			<a
-				href="https://cms2.climactivity.de/_/"
-				target="_blank"
-				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
-			>
-				<i class="fa-solid fa-database  " /><span class="w-full inline-block pb-1 md:pb-0 text-sm"
-					>Database</span
-				>
-			</a>
-		</li>
-
+		<SidebarButton iconClass="fa-globe" target="https://nk.climactivity.de" label="Gameserver" />
+		<SidebarButton
+			iconClass="fa-database"
+			target="https://cms2.climactivity.de/_/"
+			label="Database"
+		/>
 		<div class="my-2 border border-black w-8" />
 
-		<li class="my-2 md:my-0">
-			<button
-				on:click={check}
-				class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-indigo-400"
-			>
-				<i class="fa-solid fa-arrows-left-right " />
-			</button>
-		</li>
+		<SidebarButton iconClass="fa-warning" target="/replace" label="Excel import" />
 	</ul>
 </div>
 
@@ -129,11 +65,11 @@
 		opacity: 0;
 	}
 
-	.side {
+	/* .side {
 		transition: ease-in-out all 0.3s;
 		z-index: 9999;
 		width: 9rem;
-	}
+	} */
 
 	.side span {
 		transition: ease-in-out all 0.1s;

@@ -104,3 +104,5 @@ export const makeSlug = (title) => {
 	const regex = /[^a-z_]/g;
 	return title.split('(')[0].trim().toLowerCase().replace(regex, '_');
 };
+
+export const activeTabStore = writable('');
