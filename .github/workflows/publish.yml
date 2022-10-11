@@ -28,7 +28,6 @@ jobs:
       
       - name: build and push the image
         run: |
-          docker build . -f ./Dockerfile --tag ghcr.io/climactivity/cy-cms-2:latest
-          docker run ghcr.io/climactivity/cy-cms-2:latest
+          docker build . -f ./Dockerfile-push-release --tag ghcr.io/climactivity/cy-cms-2:latest
           docker push ghcr.io/climactivity/cy-cms-2:latest
   
