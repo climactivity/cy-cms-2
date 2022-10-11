@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { activeTabStore } from '$lib/stores/stores';
 	import { afterUpdate, getContext, setContext, onMount } from 'svelte';
 	import ContentEditorActions from './content-editor-actions.svelte';
 
@@ -7,7 +8,7 @@
 	let content;
 
 	let tabs = [];
-	let activeTab = { title: 'Metadata' };
+	let activeTab = { title: '' };
 	const makeTabs = () => {
 		if (content.children.length > 0) {
 			tabs = [];
@@ -27,14 +28,20 @@
 	};
 
 	const setActiveTab = (tab) => {
-		activeTab = tab;
+		if (activeTab === tab) {
+			activeTabStore.set('');
+			activeTab = { title: '' };
+		} else {
+			activeTabStore.set(tab.title);
+			activeTab = tab;
+		}
 	};
 
 	// get size of static descendants here
 	onMount(makeTabs);
 
-	// get slot size (and static descendants) here
-	afterUpdate(makeTabs);
+	// // get slot size (and static descendants) here
+	// afterUpdate(makeTabs);
 </script>
 
 <div class="layout ">
@@ -49,7 +56,7 @@
 		id="breadcrumbs"
 		class="sticky top-10 h-7 z-50 bg-white py-1 text-xs border-b  border-zinc-200 mr-3"
 	>
-		springe zu:
+		zeige nur:
 		{#each tabs as tab}
 			<a
 				href={`#${tab.title}`}
@@ -59,7 +66,7 @@
 			>
 		{/each}
 	</div>
-	<div class="content w-full " bind:this={content}>
+	<div class="content w-full mt-12" bind:this={content}>
 		<slot />
 	</div>
 </div>

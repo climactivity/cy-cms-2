@@ -1,10 +1,15 @@
-<script>
-	import StringEdit from '../Editor/string-edit.svelte';
+<script lang="ts">
+	import TodoEdit from './TodosEdit.svelte';
 
-	export let data;
+	import StringEdit from '../Editor/string-edit.svelte';
+	import ReorderableList from '../ReorderableList.svelte';
+	import type { Challenge, Difficulty } from './challenges';
+	import TodoListEntry from './TodoListEntry.svelte';
+
+	export let data: Difficulty;
 </script>
 
-<div>
+<div class="space-y-4">
 	<StringEdit id="name" label="Name" type="text" placeholder="Name" bind:value={data.name} />
 
 	<StringEdit
@@ -22,4 +27,6 @@
 		placeholder="upgradeText"
 		bind:value={data.upgradeText}
 	/>
+
+	<TodoEdit bind:data={data.todos} />
 </div>
