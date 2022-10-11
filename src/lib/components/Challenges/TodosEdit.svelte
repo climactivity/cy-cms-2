@@ -17,7 +17,7 @@
 		indexField="index"
 		listCols="5fr 1fr"
 	/>
-	<StringEdit id="diffTodo" label="Neues todo" bind:value={newTodoDiff.name} />
+	<StringEdit id="diffTodo" type="richtext" label="Neues todo" bind:value={newTodoDiff.name} />
 	<button
 		class="text-black text-sm px-2 py-1 border-black border-2 rounded-lg"
 		on:click={(e) => {

@@ -7,7 +7,7 @@
 	export let value: Difficulty;
 	export let index;
 
-	if (index) value.index = index;
+	value.index = index ?? 0;
 
 	export let onClick = (e) => {};
 	export let onDelete = () => {};

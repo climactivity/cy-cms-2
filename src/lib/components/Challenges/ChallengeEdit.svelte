@@ -30,6 +30,9 @@
 		console.log(difficulties);
 		selectedDifficulty = {};
 	};
+
+	const jsonFields = ['difficulties', 'notificationDays'];
+	const listFields = ['tags'];
 </script>
 
 <ContentEditor
@@ -39,6 +42,8 @@
 	titleplaceholder="Neue Challenge"
 	saveTarget="challenges"
 	{editing}
+	{jsonFields}
+	{listFields}
 >
 	<ContentEditorSection label="Metadata">
 		<StringEdit
@@ -68,7 +73,7 @@
 
 		<TopicsEdit id="topic" label="Bereich" placeholder="-" bind:value={data.topic} />
 
-		<TagsEdit id="tags" label="Tags" placeholder="tag1, tag2, ..." value={data.tags} />
+		<TagsEdit id="tags" label="Tags" placeholder="tag1, tag2, ..." bind:value={data.tags} />
 
 		<FileEdit id="image" label="Image" type="file" bind:value={data.image} />
 	</ContentEditorSection>
@@ -88,7 +93,7 @@
 		<div class="py-4">
 			<label for="lead">
 				Ist Super-Challenge?
-				<input id="lead" type="checkbox" />
+				<input id="lead" type="checkbox" bind:checked={data.lead} />
 			</label>
 		</div>
 	</ContentEditorSection>
@@ -144,7 +149,7 @@
 				<svelte:component
 					this={DifficultyCard}
 					bind:value={diff}
-					index={data.difficulties ? Object.values(data.difficulties).length : 0}
+					index={Object.values(data.difficulties).indexOf(diff) ?? 0}
 					onClick={(e) => {
 						console.log(diff);
 						selectedDifficulty = diff;
@@ -211,6 +216,6 @@
 	</ContentEditorSection>
 </ContentEditor>
 
-<pre>
+<!-- <pre>
     {JSON.stringify(data, null, 2)}
-</pre>
+</pre> -->

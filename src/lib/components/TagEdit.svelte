@@ -11,11 +11,11 @@
 	export let afterSubmit = () => {};
 	const addTag = () => {
 		console.log(data);
-		client.records.create('tag', data);
+		client.records.create('tags', data);
 	};
 
 	const updateTag = () => {
-		client.records.update('tag', data.id, data);
+		client.records.update('tags', data.id, data);
 	};
 </script>
 

@@ -8,7 +8,7 @@
 	class="{on ? 'sidebar' : 'side'} h-screen menu bg-white p-4 flex items-start nunito  shadow z-40"
 >
 	<ul class="list-reset ">
-		<SidebarButton iconClass="fa-solar-panel" target="/" label="Home" />
+		<SidebarButton iconClass="fa-home" target="/" label="Home" />
 
 		<div class="my-2 border border-black w-8" />
 
@@ -24,6 +24,9 @@
 			target="https://cms2.climactivity.de/_/"
 			label="Database"
 		/>
+		<div class="my-2 border border-black w-8" />
+
+		<SidebarButton iconClass="fa-warning" target="/replace" label="Excel import" />
 	</ul>
 </div>
 
@@ -62,11 +65,11 @@
 		opacity: 0;
 	}
 
-	.side {
+	/* .side {
 		transition: ease-in-out all 0.3s;
 		z-index: 9999;
 		width: 9rem;
-	}
+	} */
 
 	.side span {
 		transition: ease-in-out all 0.1s;

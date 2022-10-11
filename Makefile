@@ -20,7 +20,7 @@ serve:
 	go run cms/main.go serve
 
 collections: 
-	go run $(MAIN) migrate collections -y
+	go run $(MAIN) migrate collections
 
 run-container:
 	docker-compose up -d

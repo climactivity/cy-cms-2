@@ -5,6 +5,10 @@
 
 	export let data, title, titleplaceholder, editing, dataclass;
 	export let saveTarget;
+
+	export let jsonFields = ['difficulties', 'notificationDays'];
+	export let listFields = ['tags'];
+
 	let content;
 
 	let tabs = [];
@@ -51,6 +55,8 @@
 		class="header"
 		bind:saveTarget
 		{editing}
+		{jsonFields}
+		{listFields}
 	/>
 	<div
 		id="breadcrumbs"

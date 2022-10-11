@@ -5,7 +5,7 @@
 <li title={label} class="my-2 md:my-0 sb-elem group show-label relative">
 	<a
 		href={target}
-		class="block py-1 md:py-3 pl-1 align-middle text-black no-underline hover:text-zinc-400"
+		class="block py-1 md:py-3 pl-2 align-middle text-black no-underline hover:text-zinc-400"
 	>
 		<i class="fa-solid {iconClass}" />
 	</a>

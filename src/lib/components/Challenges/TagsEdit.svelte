@@ -14,15 +14,21 @@
 		{#if label}
 			<label class="font-semibold" for={id}>{label}</label>
 		{/if}
-		<div>
+		<div
+			class="grid grid-cols-6 place-items-stretch"
+			style="grid-template-columns: repeat(20px,4);"
+		>
 			{#each options as tag}
-				<label>
+				<label class="bg-zinc-200 border border-zinc-400 px-1  mx-2 my-1 whitespace-nowrap">
 					{tag.label}
 					<input
 						type="checkbox"
-						checked={value.some((v) => v === tag.id)}
+						checked={value ? value.some((v) => v === tag.id) : false}
 						on:change={(e) => {
 							let checked = e.target.checked;
+							if (!value) {
+								value = [];
+							}
 							if (checked) {
 								value = [...value, tag.id];
 							} else {

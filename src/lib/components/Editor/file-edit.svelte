@@ -1,14 +1,27 @@
 <script lang="ts">
-	export let value;
 	export let label: string = '';
 	export let id: string;
+	let files;
+	export let value;
 </script>
 
 <div>
 	{#if label}
 		<label class="font-semibold" for={id}>{label}</label>
 	{/if}
-	<input {id} type="file" bind:value {...$$props} class="form-field" />
+
+	{#if value}
+		Aktuelles Bild: {value}
+	{/if}
+	<input
+		{id}
+		type="file"
+		bind:files
+		class="form-field"
+		on:change={() => {
+			value = files;
+		}}
+	/>
 </div>
 
 <style lang="scss">

@@ -10,14 +10,14 @@
 
 <div>
 	<label for={id}>{label}</label>
-	<select {id} bind:value class="w-full rounded-md shadow-sm px-4 py-2">
-		{#await topics then options}
+	{#await topics then options}
+		<select {id} bind:value class="w-full rounded-md shadow-sm px-4 py-2">
 			{#if placeholder}
 				<option value={null}>{placeholder}</option>
 			{/if}
 			{#each options as option}
 				<option value={option.id}>{option.label}</option>
 			{/each}
-		{/await}
-	</select>
+		</select>
+	{/await}
 </div>

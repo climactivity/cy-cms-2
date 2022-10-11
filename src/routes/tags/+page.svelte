@@ -4,6 +4,7 @@
 
 	import TopicListEntry from '$lib/components/TopicListEntry.svelte';
 	import TagEdit from '$lib/components/TagEdit.svelte';
+	import TagListEntry from '$lib/components/TagListEntry.svelte';
 
 	let topics = client.records.getFullList('tags');
 
@@ -11,7 +12,7 @@
 		topics = client.records.getFullList('tags');
 	};
 	const onDelete = async (topic) => {
-		console.log('delete topic', topic.id);
+		console.log('delete tag', topic.id);
 		await client.records.delete('tags', topic.id);
 		update();
 	};
@@ -31,7 +32,7 @@
 			<div class="font-bold border-b px-2 py-1">Bereich</div>
 			<div class="font-bold border-b px-2 py-1">Löschen</div>
 			{#each data as tag}
-				<TopicListEntry value={tag} {onDelete} />
+				<TagListEntry value={tag} {onDelete} />
 			{/each}
 		</div>
 	{/if}

@@ -5,6 +5,7 @@
 	import PocketBase from 'pocketbase';
 	import { findRecord } from '$lib/find-record';
 	import { client } from '$lib/stores/stores';
+	import ReplaceState from '$lib/components/ReplaceState.svelte';
 
 	// const records =  client.records.getFullList('test', 200 /* batch size */, {
 	// 	sort: '-created',
@@ -16,11 +17,7 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<!-- {#await authData then userData}
-		you are logged in as {JSON.stringify(userData.user.email)}
-	{/await} -->
-</section>
+<h1 class="font-bold text-2xl py-4">Home</h1>
 
 <style>
 	section {
