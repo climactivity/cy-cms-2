@@ -3,8 +3,9 @@
 
 	import StringEdit from '../Editor/string-edit.svelte';
 	import ReorderableList from '../ReorderableList.svelte';
-	import type { Challenge, Difficulty } from './challenges';
+	import type { Challenge, Difficulties, Difficulty } from './challenges';
 	import TodoListEntry from './TodoListEntry.svelte';
+	import RtfEdit from '../Editor/rtf-edit.svelte';
 
 	export let data: Difficulty;
 </script>
@@ -12,19 +13,12 @@
 <div class="space-y-4">
 	<StringEdit id="name" label="Name" type="text" placeholder="Name" bind:value={data.name} />
 
-	<StringEdit
-		id="taskDescription"
-		label="Beschreibung"
-		type="richtext"
-		placeholder="taskDescription"
-		bind:value={data.taskDescription}
-	/>
+	<RtfEdit id="taskDescription" label="Beschreibung" bind:value={data.taskDescription} />
 
-	<StringEdit
+	<RtfEdit
 		id="upgradeText"
 		label="Level geschafft Text"
-		type="richtext"
-		placeholder="upgradeText"
+		description="Wird angeizeigt wenn dieser Schwierigkeitsgrad der Challenge geschafft wurden, klopf der Nutzer:in nochmal auf die Schulter"
 		bind:value={data.upgradeText}
 	/>
 

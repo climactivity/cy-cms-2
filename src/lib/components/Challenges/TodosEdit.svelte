@@ -9,13 +9,13 @@
 	let newTodoDiff = { name: '', index: data?.length ?? 0 };
 </script>
 
-<div>
+<div class="space-y-2">
 	<ReorderableList
 		listItem={TodoListEntry}
 		bind:value={data}
 		headers={['Todos', '-']}
 		indexField="index"
-		listCols="5fr 1fr"
+		listCols="5fr"
 	/>
 	<StringEdit id="diffTodo" type="richtext" label="Neues todo" bind:value={newTodoDiff.name} />
 	<button

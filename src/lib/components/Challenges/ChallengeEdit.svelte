@@ -5,6 +5,7 @@
 	import ContentEditorSection from '../Editor/content-editor-section.svelte';
 	import ContentEditor from '../Editor/content-editor.svelte';
 	import FileEdit from '../Editor/file-edit.svelte';
+	import RtfEdit from '../Editor/rtf-edit.svelte';
 	import SelectEdit from '../Editor/select-edit.svelte';
 	import StringEdit from '../Editor/string-edit.svelte';
 	import type { Challenge, Difficulty } from './challenges';
@@ -33,6 +34,15 @@
 
 	const jsonFields = ['difficulties', 'notificationDays'];
 	const listFields = ['tags'];
+
+	let permaLink;
+
+	const externalBaseUrl =
+		import.meta.env.VITE_APP_BASE_URL || 'https://cy-challenge-app-beta.netlify.app';
+
+	$: if (editing && data.id) {
+		permaLink = `${externalBaseUrl}/challenge/${data.slug}`;
+	}
 </script>
 
 <ContentEditor
@@ -57,6 +67,17 @@
 
 		<StringEdit id="id" label="id" type="string" placeholder="id" readonly bind:value={data.id} />
 
+		<div class="flex flex-col text-sm text-zinc-700">
+			<span class="font-semibold text-black text-base">Link in der App</span>
+			Speichern überträgt die Änderungen sofort - funktioniert auch ohne "Veröffentlichen", die Challenge
+			kann dann nur nicht in der Challenge-Liste gefunden werden.
+			<a target="_blank" href={permaLink} class="text-blue-800 text-base underline">
+				{permaLink}
+			</a>
+		</div>
+	</ContentEditorSection>
+
+	<ContentEditorSection label="Titel">
 		<StringEdit
 			id="title"
 			label="Title"
@@ -75,7 +96,14 @@
 
 		<TagsEdit id="tags" label="Tags" placeholder="tag1, tag2, ..." bind:value={data.tags} />
 
-		<FileEdit id="image" label="Image" type="file" bind:value={data.image} />
+		<FileEdit id="image" label="Image" bind:value={data.image} />
+
+		<RtfEdit
+			id="frontMatter"
+			label="Einleitung"
+			description="Wird über den Aktionen angezeigt"
+			bind:value={data.frontMatter}
+		/>
 	</ContentEditorSection>
 
 	<ContentEditorSection label="Impact">
@@ -99,37 +127,31 @@
 	</ContentEditorSection>
 
 	<ContentEditorSection label="Inhalt">
-		<StringEdit
-			id="frontMatter"
-			label="Einleitung"
-			type="richtext"
-			placeholder="frontMatter"
-			bind:value={data.frontMatter}
-		/>
-
-		<StringEdit
+		<RtfEdit
 			id="summary"
 			label="Warum"
-			type="richtext"
-			placeholder="summary"
+			description="Wird unter den Aktionen angezeigt, fasst das Warum zusammen "
 			bind:value={data.summary}
 		/>
 
-		<StringEdit id="tips" label="Tips" type="richtext" placeholder="tips" bind:value={data.tips} />
+		<RtfEdit
+			id="tips"
+			label="Tips"
+			description="Hilfreiche (optionale) Todos"
+			bind:value={data.tips}
+		/>
 
-		<StringEdit
+		<RtfEdit
 			id="content"
 			label="Tiefer eingehen"
-			type="richtext"
-			placeholder="content"
+			description="Vertiefende Informationen, da unter dem Fold weiter scrollt kann hier mehr stehen (aber bitte nicht mehr als 1000 Zeichen"
 			bind:value={data.content}
 		/>
 
-		<StringEdit
+		<RtfEdit
 			id="upgradeText"
 			label="Alle Level geschafft Text"
-			type="richtext"
-			placeholder="upgradeText"
+			description="Wird angeizeigt wenn alle Schwierigkeitsgrade der Challenge geschafft wurden, klopf der Nutzer:in nochmal auf die Schulter"
 			bind:value={data.completedText}
 		/>
 	</ContentEditorSection>
@@ -169,8 +191,14 @@
 				class="text-black text-lg px-4 py-2 border-black border-2 rounded-lg"
 				on:click={(e) => {
 					addDifficulty();
-				}}>Schwierigkeitsgrad hinzufügen <b>+</b></button
+				}}
 			>
+				{#if data.difficulties[selectedDifficulty.name]}
+					Schwierigkeitsgrad aktualisieren
+				{:else}
+					Schwierigkeitsgrad hinzufügen <b>+</b>
+				{/if}
+			</button>
 		</div>
 	</ContentEditorSection>
 

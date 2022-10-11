@@ -5,7 +5,7 @@
 	let editorElement;
 
 	export let toolbarOptions = [
-		[{ header: 1 }, { header: 2 }, 'blockquote', 'link', 'image', 'video'],
+		[{ header: 1 }, { header: 2 }, 'blockquote', 'link'],
 		['bold', 'italic', 'underline', 'strike'],
 		[{ list: 'ordered' }, { list: 'ordered' }],
 		[{ align: [] }],
@@ -16,16 +16,15 @@
 
 	let editor;
 
-	export let value = '<p>placeholder</p>';
-
+	export let value = '';
+	export let textLenght;
 	let initialValue;
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 		const { default: Delta } = await import('quill-delta');
 
-		editorElement.innerHTML = value;
-
 		setTimeout(() => {
+			if (editorElement) editorElement.innerHTML = value;
 			quill = new Quill(editorElement, {
 				modules: {
 					toolbar: toolbarOptions
@@ -35,15 +34,17 @@
 			});
 
 			editor = editorElement.querySelector('.ql-editor');
+			textLenght = editor.innerText?.length ?? 0;
 
 			quill.on('text-change', function (delta) {
 				value = editor.innerHTML;
+				textLenght = editor.innerText?.length ?? 0;
 			});
 		}, 1);
 	});
 </script>
 
-<div class="editor-wrapper bg-white">
+<div class="editor-wrapper bg-white flex flex-col">
 	<div id="editorElement" bind:this={editorElement} />
 </div>
 
@@ -52,5 +53,13 @@
 
 	.editor-wrapper {
 		max-width: inherit;
+		height: 100%;
+	}
+
+	#editor-element {
+	}
+	.ql-editor {
+		min-height: 100%;
+		overflow-y: scroll;
 	}
 </style>
