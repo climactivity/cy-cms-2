@@ -235,7 +235,9 @@
 			label="Erninnern nach ... Tagen"
 			type="string"
 			placeholder="7, 14, ..."
-			value={data.notificationDays?.join(', ') ?? ''}
+			value={data.notificationDays && data.notificationDays instanceof Array
+				? data.notificationDays.join(', ')
+				: data.notificationDays}
 			onChange={(e) => {
 				console.log(e.target.value.split(','));
 				data.notificationDays = e.target.value
