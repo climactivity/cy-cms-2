@@ -1,4 +1,5 @@
 <script lang="ts">
+	import RtfEdit from '../Editor/rtf-edit.svelte';
 	import StringEdit from '../Editor/string-edit.svelte';
 	import ReorderableList from '../ReorderableList.svelte';
 	import type { Challenge, Difficulty, Todo } from './challenges';
@@ -17,7 +18,13 @@
 		indexField="index"
 		listCols="5fr"
 	/>
-	<StringEdit id="diffTodo" type="richtext" label="Neues todo" bind:value={newTodoDiff.name} />
+	<StringEdit
+		id="diffTodo"
+		type="richtext"
+		label="Neues todo"
+		recommendedLength={200}
+		bind:value={newTodoDiff.name}
+	/>
 	<button
 		class="text-black text-sm px-2 py-1 border-black border-2 rounded-lg"
 		on:click={(e) => {

@@ -14,6 +14,7 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { fade, slide } from 'svelte/transition';
 	let isOpen = false;
+	export let recommendedLength = 999;
 
 	let y;
 
@@ -57,14 +58,25 @@
 		</div>
 
 		{#if textLenght > 1}
-			<div transition:fade class="text-right">{textLenght} Zeichen</div>
+			<div
+				transition:fade
+				class="text-right {recommendedLength - textLenght < 0 ? 'text-red-500' : ''}"
+			>
+				{textLenght} / {recommendedLength} Zeichen
+			</div>
 		{/if}
 	</div>
 </Dialog>
 
 <div class:readonly>
 	{#if label}
-		<label class="font-semibold" for={id}>{label} {readonly ? '(readonly)' : ''}</label>
+		<label class="font-semibold {recommendedLength - textLenght < 0 ? 'text-red-500' : ''}" for={id}
+			>{label}
+			{readonly ? '(readonly)' : ''}
+			{readonly ? '(readonly)' : ''}{#if !readonly}
+				- {`${textLenght ?? 0} / ${recommendedLength}`} Zeichen
+			{/if}</label
+		>
 	{/if}
 	<button on:click={open} class="fa-solid fa-pen hover:text-zinc-400" />
 

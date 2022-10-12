@@ -90,6 +90,7 @@
 					data.slug = makeSlug(data.title);
 				}
 			}}
+			recommendedLength={50}
 		/>
 
 		<TopicsEdit id="topic" label="Bereich" placeholder="-" bind:value={data.topic} />
@@ -103,6 +104,7 @@
 			label="Einleitung"
 			description="Wird über den Aktionen angezeigt"
 			bind:value={data.frontMatter}
+			recommendedLength={150}
 		/>
 	</ContentEditorSection>
 
@@ -132,6 +134,7 @@
 			label="Warum"
 			description="Wird unter den Aktionen angezeigt, fasst das Warum zusammen "
 			bind:value={data.summary}
+			recommendedLength={100}
 		/>
 
 		<RtfEdit
@@ -139,6 +142,7 @@
 			label="Tips"
 			description="Hilfreiche (optionale) Todos"
 			bind:value={data.tips}
+			recommendedLength={200}
 		/>
 
 		<RtfEdit
@@ -146,6 +150,7 @@
 			label="Tiefer eingehen"
 			description="Vertiefende Informationen, da unter dem Fold weiter scrollt kann hier mehr stehen (aber bitte nicht mehr als 1000 Zeichen"
 			bind:value={data.content}
+			recommendedLength={800}
 		/>
 
 		<RtfEdit
@@ -153,6 +158,7 @@
 			label="Alle Level geschafft Text"
 			description="Wird angeizeigt wenn alle Schwierigkeitsgrade der Challenge geschafft wurden, klopf der Nutzer:in nochmal auf die Schulter"
 			bind:value={data.completedText}
+			recommendedLength={100}
 		/>
 	</ContentEditorSection>
 
@@ -221,6 +227,7 @@
 			type="string"
 			placeholder="reminderText"
 			bind:value={data.reminderText}
+			recommendedLength={50}
 		/>
 
 		<StringEdit
@@ -240,6 +247,7 @@
 					})
 					.filter((v) => v != null);
 			}}
+			recommendedLength={-1}
 		/>
 	</ContentEditorSection>
 </ContentEditor>

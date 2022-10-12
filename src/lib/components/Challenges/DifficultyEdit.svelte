@@ -11,14 +11,27 @@
 </script>
 
 <div class="space-y-4">
-	<StringEdit id="name" label="Name" type="text" placeholder="Name" bind:value={data.name} />
+	<StringEdit
+		id="name"
+		label="Name"
+		type="text"
+		placeholder="Name"
+		recommendedLength={10}
+		bind:value={data.name}
+	/>
 
-	<RtfEdit id="taskDescription" label="Beschreibung" bind:value={data.taskDescription} />
+	<RtfEdit
+		id="taskDescription"
+		label="Beschreibung"
+		bind:value={data.taskDescription}
+		recommendedLength={100}
+	/>
 
 	<RtfEdit
 		id="upgradeText"
 		label="Level geschafft Text"
 		description="Wird angeizeigt wenn dieser Schwierigkeitsgrad der Challenge geschafft wurden, klopf der Nutzer:in nochmal auf die Schulter"
+		recommendedLength={100}
 		bind:value={data.upgradeText}
 	/>
 

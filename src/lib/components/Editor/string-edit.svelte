@@ -10,19 +10,28 @@
 	export let onInput = (e) => {};
 	export let readonly = false;
 	export let recommendedLength = 999;
+	export let textLenght = 0;
 </script>
 
 <div class:readonly>
 	{#if label}
-		<label class="font-semibold" for={id}
+		<label
+			class="font-semibold {recommendedLength -
+				(type === 'richtext' ? textLenght : value?.length ?? 0) <
+			0
+				? 'text-red-500'
+				: ''}"
+			for={id}
 			>{label}
-			{readonly ? '(readonly)' : ''}{#if !readonly}
-				- {`${value?.length ?? 0} / ${recommendedLength}`} Zeichen
+			{readonly ? '(readonly)' : ''}{#if !readonly && recommendedLength > 0}
+				- {`${type === 'richtext' ? textLenght : value?.length ?? 0} / ${recommendedLength}`} Zeichen
 			{/if}</label
 		>
 	{/if}
 	{#if type === 'textarea'}
 		<textarea {id} type="text" bind:value {placeholder} {...$$props} class="form-field" />
+	{:else if type === 'richtext'}
+		<RichTextEditor bind:textLenght bind:value {...$$props} />
 	{:else}
 		<input
 			{id}
