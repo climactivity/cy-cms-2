@@ -43,6 +43,7 @@
 				data.tag = makeSlug(data.label);
 			}
 		}}
+		recommendedLength={10}
 	/>
 
 	<div class=" w-full flex place-content-center">

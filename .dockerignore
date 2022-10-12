@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.vercel
+.output
+pb_public
+pb_data*
+cy-cms-2
+bin
+main.exe

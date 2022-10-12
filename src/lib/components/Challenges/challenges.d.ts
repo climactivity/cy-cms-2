@@ -24,6 +24,11 @@ export interface Challenge {
 	score?: number;
 
 	published?: boolean;
+
+	updated?: Date;
+	'@collectionId': string;
+	'@collectionName': string;
+	[key: string]: any;
 }
 
 export interface Difficulties {

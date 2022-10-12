@@ -30,7 +30,7 @@
 		<SidebarButton iconClass="fa-globe" target="https://nk.climactivity.de" label="Gameserver" />
 		<SidebarButton
 			iconClass="fa-database"
-			target="https://cms2.climactivity.de/_/"
+			target="https://cms.climactivity.de/_/"
 			label="Database"
 		/>
 		<div class="my-2 border border-black w-8" />

@@ -97,7 +97,7 @@
 
 		<TagsEdit id="tags" label="Tags" placeholder="tag1, tag2, ..." bind:value={data.tags} />
 
-		<FileEdit id="image" label="Image" bind:value={data.image} />
+		<FileEdit id="image" label="Image" bind:value={data.image} record={data} />
 
 		<RtfEdit
 			id="frontMatter"

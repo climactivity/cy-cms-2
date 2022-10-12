@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { client } from '$lib/stores/stores';
 	import type { Challenge } from './challenges';
 
 	export let data: Challenge;
@@ -15,6 +16,10 @@
 		</div>
 
 		<div>
+			{#if data.image}
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<img src={client.records.getFileUrl(data, data.image)} class="w-6 h-6 inline" />
+			{/if}
 			<span>{data.updated ?? ''}</span>
 			<span class="fa-solid fa-pen" />
 		</div>
