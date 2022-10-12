@@ -10,7 +10,7 @@
 </script>
 
 <div>
-	{value.name}
+	{@html value.name}
 </div>
 <div>
 	<button

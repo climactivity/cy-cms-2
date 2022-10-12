@@ -67,20 +67,20 @@
 
 		<StringEdit id="id" label="id" type="string" placeholder="id" readonly bind:value={data.id} />
 
-		<div class="flex flex-col text-sm text-zinc-700">
+		<!-- <div class="flex flex-col text-sm text-zinc-700">
 			<span class="font-semibold text-black text-base">Link in der App</span>
 			Speichern überträgt die Änderungen sofort - funktioniert auch ohne "Veröffentlichen", die Challenge
 			kann dann nur nicht in der Challenge-Liste gefunden werden.
 			<a target="_blank" href={permaLink} class="text-blue-800 text-base underline">
 				{permaLink}
 			</a>
-		</div>
+		</div> -->
 	</ContentEditorSection>
 
 	<ContentEditorSection label="Titel">
 		<StringEdit
 			id="title"
-			label="Title"
+			label="Überschrift"
 			type="string"
 			placeholder="Title"
 			bind:value={data.title}
@@ -193,7 +193,7 @@
 					addDifficulty();
 				}}
 			>
-				{#if data.difficulties[selectedDifficulty.name]}
+				{#if data && selectedDifficulty && data.difficulties && data.difficulties[selectedDifficulty.name]}
 					Schwierigkeitsgrad aktualisieren
 				{:else}
 					Schwierigkeitsgrad hinzufügen <b>+</b>
@@ -217,7 +217,7 @@
 
 		<StringEdit
 			id="reminderText"
-			label="reminderText"
+			label="Benachrichtigungstext"
 			type="string"
 			placeholder="reminderText"
 			bind:value={data.reminderText}
@@ -225,9 +225,9 @@
 
 		<StringEdit
 			id="tags"
-			label="Days"
+			label="Erninnern nach ... Tagen"
 			type="string"
-			placeholder="tag1, tag2, ..."
+			placeholder="7, 14, ..."
 			value={data.notificationDays?.join(', ') ?? ''}
 			onChange={(e) => {
 				console.log(e.target.value.split(','));

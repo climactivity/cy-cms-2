@@ -22,6 +22,6 @@ RUN go build -v -o /usr/local/bin ./...
 RUN cms migrate
 
 
-CMD ["cms", "serve", "--http=0.0.0.0:8090", "--dir=pb_data"]
+ENTRYPOINT ["cms", "serve", "--http=0.0.0.0:8090", "--dir=pb_data"]
 
 LABEL org.opencontainers.image.source="https://github.com/climactivity/cy-cms-2 "

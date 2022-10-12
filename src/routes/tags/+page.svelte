@@ -37,7 +37,7 @@
 		</div>
 	{/if}
 {:catch e}
-	<pre>{JSON.stringify(e, null, 2)}</pre>
+	<pre class="bg-red-100">{JSON.stringify(e, null, 2)}</pre>
 {/await}
 
 <TagEdit afterSubmit={update} />

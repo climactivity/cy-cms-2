@@ -69,45 +69,48 @@
 		}
 	}
 
-	const preventAccidentalBack = (e) => {
-		if (unsavedChanges > 1) {
-			console.log('Argh');
-			e.preventDefault();
-			const message = 'Ungespeicherte Änderungen gehen verloren!';
-			e.returnValue = message;
-			return message;
-		}
-	};
+	// const preventAccidentalBack = (e) => {
+	// 	if (unsavedChanges > 1) {
+	// 		console.log('Argh');
+	// 		e.preventDefault();
+	// 		const message = 'Ungespeicherte Änderungen gehen verloren!';
+	// 		e.returnValue = message;
+	// 		return message;
+	// 	}
+	// };
 </script>
-
-<svelte:window on:beforeunload={preventAccidentalBack} />
 
 <div {...$$props} class="sticky top-0 z-50">
 	<div class="pb-8 mx-auto w-full flex flex-row justify-center ">
 		<div class="bg-white  shadow-none bg-white w-full ">
 			<nav class="flex justify-between ">
 				<div class="flex flex-row col-span-1 items-center">
-					<button class="text-lg my-auto  p-2" on:click|preventDefault={goBack}>🡄</button>
+					<button class="text-lg my-auto  p-2" on:click|preventDefault={goBack}
+						><div class="bg-zinc-100 hover:text-white hover:bg-black rounded-full w-6">
+							🡄
+						</div></button
+					>
 					<span class="text-lg my-auto">{title}</span>
 					{#if unsavedChanges > 2}
-						<span class="rounded-full bg-yellow-50 border border-yellow-500 px-2 py-1 mx-2 text-xs">
-							ungespeicherte Änderungen
-						</span>
+						<div
+							class=" fa-solid fa-pencil rounded-full bg-yellow-50 border border-yellow-500 px-2 py-1 mx-1 text-xs"
+						/>
 					{/if}
 					{#if editing}
-						<span class="rounded-full bg-gray-50 border border-gray-500 px-2 py-1 mx-2 text-xs">
-							bearbeite bestehendes Document</span
-						>
+						<span
+							class="fa-solid fa-database rounded-full bg-gray-50 border border-gray-500 px-2 py-1 mx-1 text-xs"
+						/>
 					{/if}
 				</div>
 				<dev class="flex flex-row col-span-1 col-start-3 place-content-end mr-4">
-					<label class="text-lg my-auto"
+					<label
+						class="text-lg my-auto select-none  px-2 py-0.5 cursor-pointer bg-white hover:text-green-500 rounded "
 						>Veröffentlichen <input type="checkbox" bind:checked={data.published} /></label
 					>
 
 					<Toast let:triggerToast>
 						<button
-							class=" button cta ml-2 my-auto "
+							class=" button cta ml-2 my-auto text-lg px-2 py-0.5 cursor-pointer bg-white hover:bg-green-200 border-2 border-black rounded"
 							class:saving
 							on:click={async () => {
 								let ok = await save();

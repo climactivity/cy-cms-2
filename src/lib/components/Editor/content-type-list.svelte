@@ -64,7 +64,7 @@
 	>
 		<Searchbar bind:searchQuery />
 		<div
-			class="cursor-pointer w-full bg-white m-4 mb-6 text-black border-2 border-black font-bold grid items-center rounded-lg"
+			class="cursor-pointer  bg-white pl-2 my-4  ml-6 mb-6 text-black border-2 border-black font-bold grid items-center rounded-full hover:bg-zinc-300"
 			on:click={(e) => newElement(e)}
 		>
 			<button>Hinzufügen +</button>
@@ -72,11 +72,11 @@
 	</div>
 
 	{#if data}
-		<div class="grid space-y-2 space-x-2 list" style="--list-cols: {listCols}">
+		<div class="grid list" style="--list-cols: {listCols}">
 			{#each selectedData as elem}
 				<div
 					on:click|preventDefault={(e) => selectElement(e, elem)}
-					class="clickable my-2 p-2 bg-slate-50"
+					class="clickable my-0.5 p-2 "
 					class:selected={selectedId === elem['id']}
 				>
 					<svelte:component this={ListElementComponent} data={elem} />

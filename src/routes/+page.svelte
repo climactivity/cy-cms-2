@@ -19,6 +19,12 @@
 
 <h1 class="font-bold text-2xl py-4">Home</h1>
 
+<div>Hier fehlt noch Inhalt</div>
+
+<div>
+	<span class="fa-solid fa-arrow-left text-xl" /> Content ist im ersten Block in der Sidebar
+</div>
+
 <style>
 	section {
 		display: flex;

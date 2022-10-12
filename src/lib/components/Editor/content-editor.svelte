@@ -48,7 +48,7 @@
 	// afterUpdate(makeTabs);
 </script>
 
-<div class="layout ">
+<div class="layout">
 	<ContentEditorActions
 		bind:data
 		title={!title || title.length == 0 ? titleplaceholder : title}

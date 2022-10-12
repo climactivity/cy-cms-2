@@ -60,14 +60,18 @@ export const currentQuestionIndex: Writable<number> = writable(null);
 export const currentQuestion: Writable<Question> = writable(null);
 export const isProd = false;
 
-export const client = new PocketBase('http://127.0.0.1:8090');
+export const client = new PocketBase(import.meta.env.VITE_PB_BASE_URL ?? '/');
 
 if (browser) {
 	console.log(document.cookie);
 	// await client.authStore.loadFromCookie(document.cookie, 'pocketbase_auth');
 
 	if (!client.authStore.isValid) {
-		goto(`/login?next=${window.location}`);
+		const next = window.location.pathname;
+		if (next === '/login') {
+			goto(`/`);
+		}
+		goto(`/login?next=${next}`);
 	} else {
 		const path = window.location.pathname;
 		if (path.includes('login')) {

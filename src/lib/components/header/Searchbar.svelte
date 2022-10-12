@@ -5,8 +5,8 @@
 </script>
 
 <div class="searchz content-start h-20 lg:h-20 w-full   flex justify-between items-center   mb-2">
-	<div class="relative w-full max-w-3xl px-6">
-		<div class="absolute h-10 mt-1 left-0 top-0 flex items-center pl-10">
+	<div class="relative w-full max-w-3xl ">
+		<div class="absolute h-10 mt-1 right-4 top-0 flex items-center ">
 			<svg
 				class="h-4 w-4 fill-current text-gray-600"
 				xmlns="http://www.w3.org/2000/svg"
