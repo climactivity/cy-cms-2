@@ -24,4 +24,4 @@ RUN cms migrate
 
 ENTRYPOINT ["cms", "serve", "--http=0.0.0.0:8090", "--dir=pb_data"]
 
-LABEL org.opencontainers.image.source="https://github.com/climactivity/cy-cms-2 "
+LABEL org.opencontainers.image.source="https://github.com/climactivity/cy-cms-2"
