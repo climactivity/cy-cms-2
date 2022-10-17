@@ -14,7 +14,7 @@
 	let confirmDelete;
 </script>
 
-<div class="grid grid-flow-row bg-white p-2 my-2" style="" on:click={onClick}>
+<div class="grid grid-flow-row bg-white p-2 my-2 cursor-pointer" style="" on:click={onClick}>
 	<div>
 		Stufenname: {value.name}
 	</div>

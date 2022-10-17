@@ -172,7 +172,11 @@
 		/> -->
 
 		<div>
-			<span class="font-semibold">Schwierigkeitsgrade</span>
+			<span class="font-semibold"
+				>Schwierigkeitsgrade <span class="text-sm text-zinc-600"
+					>(zum bearbeiten anklicken, Inhalt wird in den Eingabefeldern unten angeizeigt)</span
+				></span
+			>
 			{#each data.difficulties ? Object.values(data.difficulties) : [] as diff}
 				<svelte:component
 					this={DifficultyCard}
