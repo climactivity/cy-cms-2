@@ -7,7 +7,7 @@
 	export let toolbarOptions = [
 		[{ header: 1 }, { header: 2 }, 'blockquote', 'link'],
 		['bold', 'italic', 'underline', 'strike'],
-		[{ list: 'ordered' }, { list: 'ordered' }],
+		[{ list: 'ordered' }, { list: 'bullet' }],
 		[{ align: [] }],
 		['clean']
 	];
