@@ -67,14 +67,14 @@
 
 		<StringEdit id="id" label="id" type="string" placeholder="id" readonly bind:value={data.id} />
 
-		<!-- <div class="flex flex-col text-sm text-zinc-700">
+		<div class="flex flex-col text-sm text-zinc-700">
 			<span class="font-semibold text-black text-base">Link in der App</span>
 			Speichern überträgt die Änderungen sofort - funktioniert auch ohne "Veröffentlichen", die Challenge
 			kann dann nur nicht in der Challenge-Liste gefunden werden.
 			<a target="_blank" href={permaLink} class="text-blue-800 text-base underline">
 				{permaLink}
 			</a>
-		</div> -->
+		</div>
 	</ContentEditorSection>
 
 	<ContentEditorSection label="Titel">

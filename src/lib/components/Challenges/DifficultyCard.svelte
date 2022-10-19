@@ -33,7 +33,7 @@
 			</ul>
 		{/if}
 	</div>
-	<div>
+	<div class="border">
 		{value.upgradeText ?? 'Stufenaufstieg?'}
 	</div>
 	<div>

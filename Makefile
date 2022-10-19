@@ -25,4 +25,8 @@ collections:
 run-container:
 	docker-compose up -d
 
+build-container: 
+	docker build . -f ./Dockerfile --tag ghcr.io/climactivity/cy-cms-2:latest
+	dockerdocker push ghcr.io/climactivity/cy-cms-2:latest
+
 MAIN = cms/main.go

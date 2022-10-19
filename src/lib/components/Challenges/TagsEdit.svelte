@@ -14,10 +14,7 @@
 		{#if label}
 			<label class="font-semibold" for={id}>{label}</label>
 		{/if}
-		<div
-			class="grid grid-cols-6 place-items-stretch"
-			style="grid-template-columns: repeat(20px,4);"
-		>
+		<div class="grid place-items-stretch" style="grid-template-columns: repeat(20px,4);">
 			{#each options as tag}
 				<label class="bg-zinc-200 border border-zinc-400 px-1  mx-2 my-1 whitespace-nowrap">
 					{tag.label}

@@ -29,7 +29,7 @@
 		>
 			<div class="font-bold border-b px-2 py-1">ID</div>
 			<div class="font-bold border-b px-2 py-1">slug</div>
-			<div class="font-bold border-b px-2 py-1">Bereich</div>
+			<div class="font-bold border-b px-2 py-1">Tag</div>
 			<div class="font-bold border-b px-2 py-1">Löschen</div>
 			{#each data as tag}
 				<TagListEntry value={tag} {onDelete} />
