@@ -256,6 +256,16 @@
 			recommendedLength={-1}
 		/>
 	</ContentEditorSection>
+
+	<ContentEditorSection label="Quellen">
+		<RtfEdit
+			id="sources"
+			label="Quellen"
+			description=""
+			bind:value={data.sources}
+			recommendedLength={100}
+		/>
+	</ContentEditorSection>
 </ContentEditor>
 
 <!-- <pre>

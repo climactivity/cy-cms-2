@@ -27,6 +27,6 @@ run-container:
 
 build-container: 
 	docker build . -f ./Dockerfile --tag ghcr.io/climactivity/cy-cms-2:latest
-	dockerdocker push ghcr.io/climactivity/cy-cms-2:latest
+	docker push ghcr.io/climactivity/cy-cms-2:latest
 
 MAIN = cms/main.go

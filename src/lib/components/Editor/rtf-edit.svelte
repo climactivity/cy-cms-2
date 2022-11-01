@@ -40,7 +40,7 @@
 		style={'position: absolute; inset: 0; background-color: rgb(0 0 0); opacity: 0.3; z-index: 51'}
 	/>
 
-	<div class="absolute inset-56 bg-white rounded-lg p-4 space-y-4 shadow-xl z-[52]">
+	<div class="absolute inset-16 bg-white rounded-lg p-4 space-y-4 shadow-xl z-[52]">
 		<DialogTitle class="text-xl font-bold">
 			<div class="flex flex-row place-content-between">
 				<div>

@@ -29,6 +29,8 @@ export interface Challenge {
 	'@collectionId': string;
 	'@collectionName': string;
 	[key: string]: any;
+
+	sources?: string;
 }
 
 export interface Difficulties {
