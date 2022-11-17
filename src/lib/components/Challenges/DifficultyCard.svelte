@@ -26,8 +26,8 @@
 		{#if value.todos && value.todos.length > 0}
 			<ul>
 				{#each value.todos as todo}
-					<li class="list-disc ml-5">
-						{todo.name}
+					<li class="list-disc ml-5 prose">
+						{@html todo.name}
 					</li>
 				{/each}
 			</ul>

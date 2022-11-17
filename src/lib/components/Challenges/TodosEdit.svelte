@@ -31,6 +31,7 @@
 			if (!data || !(data instanceof Array)) {
 				data = [];
 			}
+			newTodoDiff.index = data.length;
 			data = [...data, newTodoDiff];
 			newTodoDiff = { name: '', index: data?.length ?? 0 };
 			console.log(data);
