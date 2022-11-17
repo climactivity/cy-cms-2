@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
 
 	import { ToastStyle } from '$lib/components/Toast/toast-types';
 	import Toast from '$lib/components/Toast/toast.svelte';
@@ -58,26 +58,34 @@
 	export let data: Content;
 	export let title = '';
 	const goBack = (event) => {
-		history.back();
+		if (unsavedChanges > 2) {
+			if (confirm('Ungespeicherte Änderungen gehen verloren!')) {
+				history.back();
+			}
+		} else {
+			history.back();
+		}
 	};
 	let saving = false;
 	let unsavedChanges = 0;
 
 	$: if (data) {
 		unsavedChanges = unsavedChanges + 1;
-		if (unsavedChanges > 1) {
+		if (unsavedChanges > 2) {
+			// window.onbeforeunload = preventAccidentalBack;
+			window.addEventListener('beforeunload', preventAccidentalBack);
 		}
 	}
 
-	// const preventAccidentalBack = (e) => {
-	// 	if (unsavedChanges > 1) {
-	// 		console.log('Argh');
-	// 		e.preventDefault();
-	// 		const message = 'Ungespeicherte Änderungen gehen verloren!';
-	// 		e.returnValue = message;
-	// 		return message;
-	// 	}
-	// };
+	const preventAccidentalBack = (e) => {
+		if (unsavedChanges > 1) {
+			console.log('Argh');
+			e.preventDefault();
+			const message = 'Ungespeicherte Änderungen gehen verloren!';
+			e.returnValue = message;
+			return message;
+		}
+	};
 </script>
 
 <div {...$$props} class="sticky top-0 z-50">
