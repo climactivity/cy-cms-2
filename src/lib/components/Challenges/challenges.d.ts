@@ -1,3 +1,5 @@
+import { fromJSON } from 'postcss';
+
 export interface Challenge {
 	id?: string;
 	slug: string;
@@ -52,3 +54,19 @@ export interface Todo {
 
 export type ChallengeImpact = 'bigpoint' | 'peanut';
 export type ChallengeType = 'one-time' | 'recurring' | 'repeatable';
+
+export interface MonthlyChallenge {
+	id?: string;
+
+	from: string;
+	to: string;
+	challenges: string[]; //
+	title: string;
+	body: string;
+	sources?: string;
+	updated?: Date;
+	'@collectionId'?: string;
+	'@collectionName'?: string;
+	headerImage?: File | string;
+	published?: boolean;
+}

@@ -24,6 +24,11 @@
 		<SidebarButton iconClass="fa-swatchbook" target="/topics" label="Bereiche" />
 		<SidebarButton iconClass="fa-tags" target="/tags" label="Tags" />
 		<SidebarButton iconClass="fa-medal" target="/challenges" label="Challenges" />
+		<SidebarButton
+			iconClass="fa-calendar"
+			target="/monthly-challenges"
+			label="monthly-challenges"
+		/>
 
 		<div class="my-2 border border-black w-8" />
 

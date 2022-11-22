@@ -61,6 +61,10 @@ export const currentQuestion: Writable<Question> = writable(null);
 export const isProd = false;
 
 export const client = new PocketBase(import.meta.env.VITE_PB_BASE_URL ?? '/');
+client.beforeSend = function (url, reqConfig) {
+	delete reqConfig.signal;
+	return reqConfig;
+};
 
 if (browser) {
 	console.log(document.cookie);
