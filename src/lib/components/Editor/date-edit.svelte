@@ -1,14 +1,31 @@
 <script lang="ts">
-	export let value: string = '';
+	import { onMount } from 'svelte';
+
+	export let value: string;
 	export let label: string = '';
 	export let id: string;
-	export let onChange = (e) => {};
-	export let onInput = (e) => {};
+
+	let date: string;
+
+	const setValue = (_e) => {
+		console.log(date);
+		value = date;
+	};
+
+	onMount(() => {
+		if (value) {
+			const _date = new Date(value);
+			console.log(_date);
+			if (_date) {
+				date = _date.toISOString().slice(0, 10);
+			}
+		}
+	});
 </script>
 
 <div>
 	<label class="font-semibold" for={id}>{label}</label>
-	<input type="date" />
+	<input type="date" bind:value={date} on:change={setValue} />
 </div>
 
 <style lang="scss">

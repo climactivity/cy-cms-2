@@ -17,8 +17,8 @@
 	import TopicsEdit from './TopicsEdit.svelte';
 
 	export let data: MonthlyChallenge = {
-		from: Date.now(),
-		to: Date.now(),
+		from: '',
+		to: '',
 		challenges: [],
 		title: '',
 		body: '',
@@ -28,8 +28,8 @@
 	const dataclass = 'monthly_challenge';
 	export let editing = false;
 
-	const jsonFields = ['difficulties', 'notificationDays'];
-	const listFields = ['tags'];
+	const jsonFields = [];
+	const listFields = ['challenges'];
 
 	let permaLink;
 
@@ -130,13 +130,14 @@
 			</div>
 
 			<button
+				class="px-2 py-1  h-full bg-opacity-0 border-2 border-black text-black text-center font-bold rounded hover:bg-green-500"
 				on:click={(e) => {
 					if (!data.challenges) {
 						data.challenges = [];
 					}
 					data.challenges = [...data.challenges, newChallenge];
 					newChallenge = undefined;
-				}}>add challenge</button
+				}}>Challenge hinzufügen +</button
 			>
 		{/await}
 	</ContentEditorSection>

@@ -6,14 +6,14 @@
 	export let onDelete = (value) => {};
 </script>
 
-<div>
+<div class="text-sm text-gray-500 font-mono">
 	{value.id}
 </div>
 <div>
-	{value.from}
+	{value.from.slice(0, 10)}
 </div>
 <div>
-	{value.to}
+	{value.to.slice(0, 10)}
 </div>
 <div>
 	{value.title}
